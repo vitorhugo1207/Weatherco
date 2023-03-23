@@ -1,0 +1,14 @@
+{
+  "name": "Weatherco",
+  "version": "1.0.0",
+  "description": "A Weather application with animes themes.",
+  "main": "main.js",
+  "author": "vitorhugo1207",
+  "license": "GNU General Public License v3.0",
+  "devDependencies": {
+    "electron": "^23.1.4"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}
