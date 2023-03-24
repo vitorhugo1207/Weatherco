@@ -1,16 +1,24 @@
 module.exports = class getWeather{
     constructor(){
         this.url = "http://api.weatherapi.com/v1/current.json?";
-        this.apikey
+        this.apikey = undefined;
     }
        
     async getApiKey(){
-        console.log("Estou sendo chamada!! yay");
-        fetch("./APIKEY.json").then((response) => response.json()).then((json) => this.apikey);
-        document.querySelector(".key") = this.apikey
+        const fs = require('fs')
+        const path = require('path')
+        this.apikey = fs.readFileSync(__dirname + '/APIKEY.json', 'utf-8', (err, data) => {
+            if (err){
+                console.error(err);
+                return;
+            }
+            this.apikey = data;
+        })
+        this.apikey = JSON.parse(this.apikey); // transform reponse in a json object
+        this.apikey = this.apikey.key
     }
 
-    requestWeather(){
+    async requestWeather(){
         console.log("test")
     }
 }

@@ -12,7 +12,8 @@ const createWindow = () => {
 
 function loadFunctions(){
     var test = require('./GetWeather.js');
-    console.log(test.getApiKey())
+    const Test = new test(); // Instanciar funções contruidoras
+    console.log(Test.getApiKey())
 }
 
 // Loading Window
