@@ -10,10 +10,10 @@ const createWindow = () => {
     win.loadFile("index.html")
 }
 
-function LoadFunction(){
-    var getWeather = require('./GetWeather.js');
-    const GetWeather = new getWeather(); // Instanciar funções contruidoras
-    console.log(GetWeather.requestWeather())
+async function LoadFunction(){
+    var Weather = require(__dirname + '/weather.js');
+    var weather = new Weather(); // Instanciar funções contruidoras
+    console.log(await weather.requestWeather())
 }
 LoadFunction();
 
