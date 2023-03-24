@@ -4,21 +4,21 @@ const { app, BrowserWindow } = require('electron')
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 800,
-        height:600,
+        height: 600,
         autoHideMenuBar: true
     })
     win.loadFile("index.html")
 }
 
-function loadFunctions(){
-    var test = require('./GetWeather.js');
-    const Test = new test(); // Instanciar funções contruidoras
-    console.log(Test.getApiKey())
+function LoadFunction(){
+    var getWeather = require('./GetWeather.js');
+    const GetWeather = new getWeather(); // Instanciar funções contruidoras
+    console.log(GetWeather.requestWeather())
 }
+LoadFunction();
 
 // Loading Window
 // whenReady wait for ready event is fired.
 app.whenReady().then(() => {
     createWindow();
-    loadFunctions()
 })
