@@ -1,24 +1,19 @@
-class Printer{
-    constructor(forecastJSON, document){
-        this.forecastJSON = forecastJSON;
-        this.document = document;
-    }
+const { ipcRenderer } = require('electron'); 
+// ipcRenderer is used on renderer file and ipcMain used on main.js file.
 
-    printData(){
-        document.getElementById("location").innerHTML = "funfou, FINALMENTEEEEEEEEEEEEEE!!!!!!!!!!!!";
-        this.document.getElementById("location").innerHTML = `${this.forecastJSON.location.name}, ${this.forecastJSON.location.region}`
+class Printer{
+    constructor(){
+        this.forecastJSON = undefined;
+    }
+    
+    async printData(){
+        ipcRenderer.send('GetforecastJSON'); // calling GetforecastJSON on main.js
+
+        ipcRenderer.on('forecastJSON', (event, forecastJSON) => {
+            document.getElementById('location').innerHTML = `${forecastJSON.location.name}, ${forecastJSON.location.region}`;
+        });
     }
 }
-Printer.printData();
-// async function LoadFunction(){
-//     var Weather = require(__dirname + '/weather.js');
-//     var weather = new Weather(); // Instanciar funções contruidoras
-    
-//     let forecastJSON = await weather.forecastJSON();
 
-//     var Printer = require(__dirname + "/printer.js"); 
-//     var printer = new Printer(forecastJSON); // If want to pass a value retorn from another function.
-    
-//     printer.printData();
-// }
-// await LoadFunction();
+const printer = new Printer();
+printer.printData();

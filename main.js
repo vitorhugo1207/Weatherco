@@ -7,20 +7,23 @@ const createWindow = () => {
         width: 800,
         height: 600,
         autoHideMenuBar: true,
-        webPreferences: {preload: path.join(__dirname, 'preload.js')} 
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
     })
     win.loadFile("index.html");
-}
-
-function handleSetTitle(event, title){
-    const webContents = event.sender;
-    const win = BrowserWindow.fromBrowserView(webContents);
-    win.setTitle(title);
 }
 
 // Loading Window
 // whenReady wait for ready event is fired.
 app.whenReady().then(() => {
-    ipcMain.on('set-title', handleSetTitle);
     createWindow();
+})
+
+ipcMain.on('GetforecastJSON', async(event) => {
+    const Weather = require(__dirname + '/weather.js');
+    const weather = new Weather();
+
+    event.sender.send('forecastJSON', await weather.forecastJSON());
 })
