@@ -10,13 +10,11 @@ class Printer{
         ipcRenderer.on('forecastJSON', (event, forecastJSON) => {
             document.querySelector('.location').innerHTML = `${forecastJSON.location.name}, ${forecastJSON.location.region}`;
 
-            // Patchy rain possible
-            if(1063 == forecastJSON.current.condition.code){
-                document.body.style.backgroundImage = "url(./imgs/bg/rain.gif)";
-                document.body.style.backgroundAttachment = "fixed";
-                document.body.style.backgroundSize = "100% 100%";
-                document.body.style.backgroundRepeat = "no-repeat";
-            };
+            // document.querySelector('#bg-img').src = "./imgs/bg/rain.gif";
+
+            document.querySelector('.temp_c').innerHTML = `${forecastJSON.current.temp_c}`;
+            
+            document.querySelector('.temp_f').innerHTML = `${forecastJSON.current.temp_f}`;
         });
     }
 }

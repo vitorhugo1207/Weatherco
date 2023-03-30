@@ -1,2 +1,2 @@
 # -Weatherco
-A Weather application with animes themes.
+A Weather application with personalized themes.
