@@ -1,20 +1,29 @@
-const electron = require("electron");
-const path = require("path");
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-let mainWindow;
-function createWindow() {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: { nodeIntegration: true, contextIsolation: false },
-  });
-  // and load the index.html of the app.
-  console.log(__dirname);
-  mainWindow.loadFile(path.join(__dirname, "../build/index.html"));
+const { app, BrowserWindow, ipcMain} = require('electron');
+const path = require('path');
+
+// Creating a Window. NOTE: this only be created after the app module's ready event if fired.
+const createWindow = () => {
+    const win = new BrowserWindow({
+        width: 800,
+        height: 600,
+        autoHideMenuBar: true,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+    })
+    win.loadFile(path.join(__dirname, "../build/index.html"));
 }
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on("ready", createWindow);
+
+// Loading Window
+// whenReady wait for ready event is fired.
+app.whenReady().then(() => {
+    createWindow();
+})
+
+ipcMain.on('GetforecastJSON', async(event) => {
+    const Weather = require(__dirname + '../src/weather.js');
+    const weather = new Weather();
+
+    event.sender.send('forecastJSON', await weather.forecastJSON());
+})
