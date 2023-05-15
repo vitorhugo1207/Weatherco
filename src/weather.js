@@ -1,7 +1,7 @@
 const { reject } = require('assert');
 const { resolve } = require('path');
 
-module.exports = class Weather{
+export class Weather{
     constructor(){
         this.url = "https://api.weatherapi.com/v1/current.json?";
         this.apikey = this.getApiKey();
@@ -34,7 +34,7 @@ module.exports = class Weather{
                 // The whole response has been received. Print out the result. 
                 resp.on('end', () => {
                     resolve(JSON.parse(data));
-                    console.log(JSON.parse(data).current.condition.code)
+                    console.log(JSON.parse(data).current.condition.code);
                 })
             }).on("error", (err) => {
                 reject(err);

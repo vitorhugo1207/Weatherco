@@ -1,16 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
+import {Weather} from './weather';
 
-function getWeatcher(){
+class App extends Component{
+    async getWeather(){
+        const weather = new Weather();
+        return await weather.forecastJSON();
+    }
     
-}
-
-function App() {
-  return (
-    <div>
-        <h1>{}</h1>
-    </div>
-  );
+    render(props) {    
+        return (
+            <div>
+                <h1>{this.getWeather()}</h1>
+            </div>
+        );
+    }
 }
 
 export default App;

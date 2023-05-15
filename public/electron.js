@@ -21,9 +21,9 @@ app.whenReady().then(() => {
     createWindow();
 })
 
-ipcMain.on('GetforecastJSON', async(event) => {
-    const Weather = require(__dirname + '../src/weather.js');
-    const weather = new Weather();
+// ipcMain.on('GetforecastJSON', async(event) => {
+//     const Weather = require(__dirname + '../src/weather.js');
+//     const weather = new Weather();
 
-    event.sender.send('forecastJSON', await weather.forecastJSON());
-})
+//     event.sender.send('forecastJSON', await weather.forecastJSON());
+// })
