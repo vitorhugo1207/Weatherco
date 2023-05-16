@@ -12,12 +12,10 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "electron .",
+    "build": "craco build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-	"build": "craco build",
-	"start": "electron ."
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -38,7 +36,9 @@
     ]
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
     "electron": "^24.1.2",
+    "webpack-dev-middleware": "^6.1.0",
     "webpack-node-externals": "^3.0.0"
   },
   "main": "public/electron.js",

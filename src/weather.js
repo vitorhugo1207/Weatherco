@@ -34,7 +34,7 @@ export class Weather{
                 // The whole response has been received. Print out the result. 
                 resp.on('end', () => {
                     resolve(JSON.parse(data));
-                    console.log(JSON.parse(data).current.condition.code);
+                    console.log("API Called and Response Received!");
                 })
             }).on("error", (err) => {
                 reject(err);

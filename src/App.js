@@ -12,7 +12,7 @@ class App extends Component{
     render(props) {    
         return (
             <div>
-                <h1>{this.getWeather()}</h1>
+                <h1>{this.getWeather().location}</h1>
             </div>
         );
     }
