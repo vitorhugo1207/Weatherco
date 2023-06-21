@@ -1,21 +1,29 @@
-import React, {Component} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
 import {Weather} from './weather';
 
-class App extends Component{
-    async getWeather(){
-        const weather = new Weather();
-        return await weather.forecastJSON();
+// npm start
+// cls && npm run build && copy APIKEY.json build
+
+function App() {
+    const [weatherData, setWeatherData] = useState('');
+
+    async function getWeather(){
+        let weather = new Weather();
+        const response = await weather.forecastJSON();
+        setWeatherData(response);
     }
-    
-    render(props) {    
-        return (
-            <div>
-                <h1>{this.getWeather().location}</h1>
-            </div>
-        );
-    }
+
+    useEffect(() => {
+        getWeather();
+    }, [])
+
+    return (
+    <div className=''>
+        <p>{weatherData?.location?.name}-{weatherData?.location?.region}</p>
+    </div>
+    );
 }
 
 export default App;
