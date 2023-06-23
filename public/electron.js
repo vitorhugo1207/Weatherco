@@ -1,11 +1,11 @@
-const { app, BrowserWindow, ipcMain} = require('electron');
+const { app, BrowserWindow} = require('electron');
 const path = require('path');
 
 // Creating a Window. NOTE: this only be created after the app module's ready event if fired.
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 800,
-        height: 600,
+        height: 400,
         autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: true,
