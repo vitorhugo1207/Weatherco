@@ -12,44 +12,55 @@ import {Weather} from './weather';
 function App() {
     const [weatherData, setWeatherData] = useState('');
     const [temp, setTemp] = useState('');
+    const [feelsLike, setFeelsLike] = useState('');
     const [typeTemp, setTypeTemp] = useState("C");
-    
+    const [loading, setLoading] = useState(true); // semaphore to run initTemp() after getWeather receve API response
+
     async function getWeather(){
         let weather = new Weather();
         const response = await weather.forecastJSON();
         setWeatherData(response);
+        setLoading(false); // semaphore to run initTemp() after getWeather receve API response
     }
-    
+
     function switchTypeTemp(){
         if(typeTemp === "C"){
-            setTemp(weatherData?.current?.temp_f);
+            setTemp(weatherData?.current?.temp_f + "°F"); // this "?" serve to return undefined if has nothing
+            setFeelsLike(weatherData?.current?.feelslike_f + "°F");
             setTypeTemp("F");
         }
         else{
-            setTemp(weatherData?.current?.temp_c);
+            setTemp(weatherData?.current?.temp_c + "°C");
+            setFeelsLike(weatherData?.current?.feelslike_c + "°C");
             setTypeTemp("C");
         }
     }
-
-    function initTemp(){
+    
+    async function initTemp(){
         if(typeTemp === "C"){
-            setTemp(weatherData?.current?.temp_c);
+            setTemp(weatherData?.current?.temp_c + "°C");
+            setFeelsLike(weatherData?.current?.feelslike_c + "°C");
         }
         else{
-            setTemp(weatherData?.current?.temp_f);
+            setTemp(weatherData?.current?.temp_f + "°F");
+            setFeelsLike(weatherData?.current?.feelslike_f + "°F");
         }
     }
 
-    useEffect(() => {
+    // Calling initial functions
+    useEffect(() => { // useEffect avoid repeat several times
         getWeather();
-        initTemp();
-      }, [typeTemp, weatherData]);
+        if(!loading){ // semaphore to run initTemp() after getWeather receve API response
+            initTemp();
+        }
+    }, [loading]);
     
     return (
     <div className='main'>
         <div className='head'>
             <p>{weatherData?.location?.name} - {weatherData?.location?.region}</p>
             <p className='temp' onClick={switchTypeTemp}>{temp}</p>
+            <p className='feelslike' onClick={switchTypeTemp}>Feels Like: {feelsLike}</p>
         </div>
     </div>
     );

@@ -1,5 +1,15 @@
 .head{
+    position: relative;
     text-align: center;
     color: aliceblue;
     font-size: 150%;
+}
+
+.temp, .feelslike{
+    cursor: pointer;
+}
+
+.feelslike{
+    font-size: 80%;
+    margin-bottom: 100px;
 }
