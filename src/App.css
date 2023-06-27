@@ -1,7 +1,17 @@
+.main{
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
+    color: aliceblue;
+}
+
 .head{
     position: relative;
     text-align: center;
-    color: aliceblue;
     font-size: 150%;
 }
 
@@ -11,5 +21,29 @@
 
 .feelslike{
     font-size: 80%;
-    margin-bottom: 100px;
+    
+    position: relative;
+    margin-top: -3%;
 }
+
+.detail{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.airQuality{
+    margin: 50px;
+}
+
+.statusAir{
+    position: relative;
+    
+
+    width: 10px;
+    height: 10px;
+    display: block;
+    background-color: green;
+    border-radius: 100%;
+}
+

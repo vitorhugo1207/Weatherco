@@ -47,13 +47,16 @@ function App() {
         }
     }
 
+    useEffect(() => {
+        getWeather();
+    }, [])
+
     // Calling initial functions
     useEffect(() => { // useEffect avoid repeat several times
-        getWeather();
         if(!loading){ // semaphore to run initTemp() after getWeather receve API response
             initTemp();
         }
-    }, [loading]);
+    }, [loading]); // if I have to use some external object in useEffect use dependence of useEffect
     
     return (
     <div className='main'>
@@ -61,6 +64,13 @@ function App() {
             <p>{weatherData?.location?.name} - {weatherData?.location?.region}</p>
             <p className='temp' onClick={switchTypeTemp}>{temp}</p>
             <p className='feelslike' onClick={switchTypeTemp}>Feels Like: {feelsLike}</p>
+        </div>
+        <div className='detail'>
+            <div className='airQuality'>
+                <p className='statusAir'></p>
+                <p>Air Quality</p>
+                <p>{weatherData?.current?.air_quality["us-epa-index"]}</p>
+            </div>
         </div>
     </div>
     );
