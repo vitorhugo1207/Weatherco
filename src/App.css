@@ -27,9 +27,11 @@
 }
 
 .detail{
+    display: flex;
     position: absolute;
     bottom: 0;
     left: 0;
+    justify-content: left;
 }
 
 .airQuality{
@@ -65,4 +67,8 @@
 
 .ListAirQuality{
     background-color: #555;
+}
+
+.wind{
+    margin: 50px;
 }

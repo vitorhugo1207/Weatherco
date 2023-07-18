@@ -166,6 +166,9 @@ function App() {
                         )}
                     </div>
                 </div>
+                <div className='wind'>
+                    <p>Wind</p>
+                </div>
             </div>
         </div>
     );
