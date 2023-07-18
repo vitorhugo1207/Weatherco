@@ -105,7 +105,7 @@ function App() {
             <div className='detail'>
                 <div className='airQuality'>
                     <p>Air Quality</p>
-                    <div className='statusAirDiv' onMouseEnter={() => setShowSubAirType(true)} onMouseLeave={() => setShowSubAirType(true)}>
+                    <div className='statusAirDiv' onMouseEnter={() => setShowSubAirType(true)} onMouseLeave={() => setShowSubAirType(false)}>
                         <div className='statusAirIcon' style={{backgroundColor: statusAirColor()}}></div>
                         <p style={{margin: 0, marginLeft: '10px'}} onClick={switchAirType}>{weatherData?.current?.air_quality["us-epa-index"]}</p>
                         {showSubAirType && (
