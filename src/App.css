@@ -36,14 +36,31 @@
     margin: 50px;
 }
 
-.statusAir{
-    position: relative;
-    
+.statusAirDiv{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-right: 109px;
+}
 
+.statusAirIcon{
+    position: relative;
     width: 10px;
     height: 10px;
     display: block;
-    background-color: green;
+    /* background-color: red; */
     border-radius: 100%;
 }
 
+.popup-AirQuality{
+    background-color: #000;
+    border-left: 8px solid #192e50;
+    border-radius: 10%;
+    cursor: pointer;
+    margin-top: 6vh;
+    position: relative;
+}
+
+.ListAirQuality{
+    background-color: black;
+}
