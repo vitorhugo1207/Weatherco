@@ -14,14 +14,19 @@ import {Weather} from './weather';
 
 function App() {
     const [weatherData, setWeatherData] = useState('');
+    const [loading, setLoading] = useState(true); // semaphore to run initDatas() after getWeather receve API response
+
     const [temp, setTemp] = useState('');
     const [feelsLike, setFeelsLike] = useState('');
     const [typeTemp, setTypeTemp] = useState("C");
-    const [loading, setLoading] = useState(true); // semaphore to run initDatas() after getWeather receve API response
+
     const [airQuality, setAirQuality] = useState('');
     const [typeAirQuality, setTypeAirQuality] = useState("US_EPA");
     const [showSubAirType, setShowSubAirType] = useState(false);
     const [subAirTypes, setSubAirTypes] = useState('');
+
+    const [windSpeed, setWindSpeed] = useState('');
+    const [windSpeedType, setWindSpeedType] = useState('kph'); 
 
     async function getWeather(){
         let weather = new Weather();
@@ -44,6 +49,7 @@ function App() {
     }
     
     async function initDatas(){
+        // Temp
         if(typeTemp === "C"){
             setTemp(weatherData?.current?.temp_c + "°C");
             setFeelsLike(weatherData?.current?.feelslike_c + "°C");
@@ -51,6 +57,8 @@ function App() {
             setTemp(weatherData?.current?.temp_f + "°F");
             setFeelsLike(weatherData?.current?.feelslike_f + "°F");
         }
+
+        // Air Quality
         if(typeAirQuality === "US_EPA"){
             setAirQuality(weatherData?.current?.air_quality["us-epa-index"]);
             setSubAirTypes(
@@ -79,6 +87,13 @@ function App() {
                     <li className='ListAirQuality'>10 - Very High</li>
                 </ul>
             );
+        }
+
+        // Wind
+        if(windSpeedType === "kph"){
+            setWindSpeed(weatherData?.current?.wind_kph + "khp");
+        }else{
+            setWindSpeed(weatherData?.current?.wind_mph + "mph");
         }
     }
 
@@ -168,6 +183,7 @@ function App() {
                 </div>
                 <div className='wind'>
                     <p>Wind</p>
+                    <p>{windSpeed}</p>
                 </div>
             </div>
         </div>
