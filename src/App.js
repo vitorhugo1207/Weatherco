@@ -21,16 +21,7 @@ function App() {
     const [airQuality, setAirQuality] = useState('');
     const [typeAirQuality, setTypeAirQuality] = useState("US_EPA");
     const [showSubAirType, setShowSubAirType] = useState(false);
-    const [subAirTypes, setSubAirTypes] = useState(
-        <ul className='ListAirQuality'>
-            <li className='ListAirQuality'>1 means Good</li>
-            <li className='ListAirQuality'>2 means Moderate</li>
-            <li className='ListAirQuality'>3 means Unhealthy for sensitive group</li>
-            <li className='ListAirQuality'>4 means Unhealthy</li>
-            <li className='ListAirQuality'>5 means Very Unhealthy</li>
-            <li className='ListAirQuality'>6 means Hazardous</li>
-        </ul>
-    );
+    const [subAirTypes, setSubAirTypes] = useState('');
 
     async function getWeather(){
         let weather = new Weather();
@@ -56,12 +47,39 @@ function App() {
         if(typeTemp === "C"){
             setTemp(weatherData?.current?.temp_c + "°C");
             setFeelsLike(weatherData?.current?.feelslike_c + "°C");
-        }
-        else{
+        }else{
             setTemp(weatherData?.current?.temp_f + "°F");
             setFeelsLike(weatherData?.current?.feelslike_f + "°F");
         }
-        // write here init AirQuality data
+        if(typeAirQuality === "US_EPA"){
+            setAirQuality(weatherData?.current?.air_quality["us-epa-index"]);
+            setSubAirTypes(
+            <ul className='ListAirQuality'>
+                <li className='ListAirQuality'>1 means Good</li>
+                <li className='ListAirQuality'>2 means Moderate</li>
+                <li className='ListAirQuality'>3 means Unhealthy for sensitive group</li>
+                <li className='ListAirQuality'>4 means Unhealthy</li>
+                <li className='ListAirQuality'>5 means Very Unhealthy</li>
+                <li className='ListAirQuality'>6 means Hazardous</li>
+            </ul>
+        );
+        }else{
+            setAirQuality(weatherData?.current?.air_quality["gb-defra-index"]);
+            setSubAirTypes(
+                <ul className='ListAirQuality'>
+                    <li className='ListAirQuality'>1 - Low</li>
+                    <li className='ListAirQuality'>2 - Low</li>
+                    <li className='ListAirQuality'>3 - Low</li>
+                    <li className='ListAirQuality'>4 - Moderate</li>
+                    <li className='ListAirQuality'>5 - Moderate</li>
+                    <li className='ListAirQuality'>6 - Moderate</li>
+                    <li className='ListAirQuality'>7 - High</li>
+                    <li className='ListAirQuality'>8 - High</li>
+                    <li className='ListAirQuality'>9 - High</li>
+                    <li className='ListAirQuality'>10 - Very High</li>
+                </ul>
+            );
+        }
     }
 
     function statusAirColor(){
@@ -80,7 +98,38 @@ function App() {
     }
 
     function switchAirType(){
-
+        if(typeAirQuality === "US_EPA"){
+            setAirQuality(weatherData?.current?.air_quality["gb-defra-index"]);
+            setSubAirTypes(
+                <ul className='ListAirQuality'>
+                    <li className='ListAirQuality'>1 - Low</li>
+                    <li className='ListAirQuality'>2 - Low</li>
+                    <li className='ListAirQuality'>3 - Low</li>
+                    <li className='ListAirQuality'>4 - Moderate</li>
+                    <li className='ListAirQuality'>5 - Moderate</li>
+                    <li className='ListAirQuality'>6 - Moderate</li>
+                    <li className='ListAirQuality'>7 - High</li>
+                    <li className='ListAirQuality'>8 - High</li>
+                    <li className='ListAirQuality'>9 - High</li>
+                    <li className='ListAirQuality'>10 - Very High</li>
+                </ul>
+            );
+            setTypeAirQuality("UK_DEGRA");
+        }
+        else{
+            setAirQuality(weatherData?.current?.air_quality["us-epa-index"]);
+            setSubAirTypes(
+                <ul className='ListAirQuality'>
+                    <li className='ListAirQuality'>1 means Good</li>
+                    <li className='ListAirQuality'>2 means Moderate</li>
+                    <li className='ListAirQuality'>3 means Unhealthy for sensitive group</li>
+                    <li className='ListAirQuality'>4 means Unhealthy</li>
+                    <li className='ListAirQuality'>5 means Very Unhealthy</li>
+                    <li className='ListAirQuality'>6 means Hazardous</li>
+                </ul>
+            );
+            setTypeAirQuality("US_EPA");
+        }
     }
 
     // Calling initial functions
@@ -107,7 +156,7 @@ function App() {
                     <p>Air Quality</p>
                     <div className='statusAirDiv' onMouseEnter={() => setShowSubAirType(true)} onMouseLeave={() => setShowSubAirType(false)}>
                         <div className='statusAirIcon' style={{backgroundColor: statusAirColor()}}></div>
-                        <p style={{margin: 0, marginLeft: '10px'}} onClick={switchAirType}>{weatherData?.current?.air_quality["us-epa-index"]}</p>
+                        <p style={{margin: 0, marginLeft: '10px'}} onClick={switchAirType}>{airQuality}</p>
                         {showSubAirType && (
                             <div className='popup-AirQuality'>
                                 <div>
