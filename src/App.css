@@ -53,14 +53,19 @@
 }
 
 .popup-AirQuality{
-    background-color: #000;
-    border-left: 8px solid #192e50;
-    border-radius: 10%;
-    cursor: pointer;
-    margin-top: 6vh;
-    position: relative;
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
 }
 
 .ListAirQuality{
-    background-color: black;
+    background-color: #555;
 }
