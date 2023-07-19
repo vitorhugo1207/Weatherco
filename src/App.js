@@ -26,6 +26,9 @@ function App() {
     const[visibility, setVisibility] = useState('');
     const[typeVisibility, setTypeVisibility] = useState('km');
 
+    const[precipitation, setPrecipitation] = useState('');
+    const[typePrecipitation, setTypePrecipitation] = useState('mm');
+
     async function getWeather(){
         let weather = new Weather();
         const response = await weather.forecastJSON();
@@ -100,6 +103,13 @@ function App() {
         }else{
             setVisibility(weatherData?.current?.vis_miles + " miles");
         }
+
+        // Precipitation
+        if(typePrecipitation === "mm"){
+            setPrecipitation(weatherData?.current?.precip_mm + " mm");
+        }else{
+            setPrecipitation(weatherData?.current?.precip_in + " in");
+        }
     }
 
     function statusAirColor(){
@@ -163,12 +173,22 @@ function App() {
     }
 
     function switchVisibility(){
-        if(visibility == "km"){
+        if(typeVisibility == "km"){
             setVisibility(weatherData?.current?.vis_miles + " miles");
             setTypeVisibility("miles");
         }else{
             setVisibility(weatherData?.current?.vis_km + " km");
             setTypeVisibility("km");
+        }
+    }
+
+    function switchPrecipitation(){
+        if(typePrecipitation == "mm"){
+            setPrecipitation(weatherData?.current?.precip_in + " in");
+            setTypePrecipitation("in");
+        }else{
+            setPrecipitation(weatherData?.current?.precip_mm + " mm");
+            setTypePrecipitation("mm");
         }
     }
 
@@ -221,6 +241,10 @@ function App() {
                 <div className='visibility'>
                     <p>Visibility</p>
                     <p onClick={switchVisibility}>{visibility}</p>
+                </div>
+                <div className='precipitation'>
+                    <p>Precipitation</p>
+                    <p onClick={switchPrecipitation}>{precipitation}</p>
                 </div>
             </div>
         </div>

@@ -40,8 +40,13 @@
     justify-content: left;
 }
 
-.airQuality, .wind, .windDirection, .humidity, .visibility{
-    margin: 20px;
+.airQuality, .wind, .visibility, .precipitation{
+    margin: 27px;
+    cursor: pointer;
+}
+
+.windDirection, .humidity{
+    margin: 27px;
 }
 
 .statusAirDiv{

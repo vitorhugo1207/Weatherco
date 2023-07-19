@@ -3,7 +3,7 @@ const { resolve } = require('path');
 
 export class Weather{
     constructor(){
-        this.url = "https://api.weatherapi.com/v1/current.json?";
+        this.url = "https://api.weatherapi.com/v1/forecast.json?";
         this.apikey = this.getApiKey();
         this.city = 'getulina'; // Forward it's call a function to get the geolocalization
     }
@@ -34,7 +34,6 @@ export class Weather{
                 // The whole response has been received. Print out the result. 
                 resp.on('end', () => {
                     resolve(JSON.parse(data));
-                    console.log("API Called and Response Received!");
                 })
             }).on("error", (err) => {
                 reject(err);
