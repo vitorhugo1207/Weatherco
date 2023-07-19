@@ -1,3 +1,5 @@
+/* Geral */
+
 .main{
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -15,6 +17,8 @@
     font-size: 150%;
 }
 
+/* Top part */
+
 .temp, .feelslike{
     cursor: pointer;
 }
@@ -26,6 +30,8 @@
     margin-top: -3%;
 }
 
+/* Bottom Part */
+
 .detail{
     display: flex;
     position: absolute;
@@ -34,15 +40,15 @@
     justify-content: left;
 }
 
-.airQuality{
-    margin: 50px;
+.airQuality, .wind, .windDirection, .humidity, .visibility{
+    margin: 20px;
 }
 
 .statusAirDiv{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    padding-right: 109px;
+    padding-right: 45px;
 }
 
 .statusAirIcon{
@@ -61,14 +67,10 @@
     position: absolute;
     z-index: 1;
     bottom: 50%;
-    left: 50%;
+    left: 20%;
     margin-left: -80px;
 }
 
 .ListAirQuality{
     background-color: #555;
-}
-
-.wind{
-    margin: 50px;
 }

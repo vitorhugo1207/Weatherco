@@ -5,12 +5,7 @@ import {Weather} from './weather';
 // https://www.mongodb.com/docs/realm/sdk/node/integrations/electron-cra/
 
 // npm start
-// cls && npm run build && copy APIKEY.json build
-// add-on figma
-
-// todo Do a little popup showing another informations about AirQuality
-// todo Do a switch to UK Defra in AirQuality, as celcus to fahrengeit
-// todo Create a task to auto start and run build commands 
+// cls; npm run build; copy APIKEY.json build
 
 function App() {
     const [weatherData, setWeatherData] = useState('');
@@ -27,6 +22,9 @@ function App() {
 
     const [windSpeed, setWindSpeed] = useState('');
     const [windSpeedType, setWindSpeedType] = useState('kph'); 
+
+    const[visibility, setVisibility] = useState('');
+    const[typeVisibility, setTypeVisibility] = useState('km');
 
     async function getWeather(){
         let weather = new Weather();
@@ -91,9 +89,16 @@ function App() {
 
         // Wind
         if(windSpeedType === "kph"){
-            setWindSpeed(weatherData?.current?.wind_kph + "khp");
+            setWindSpeed(weatherData?.current?.wind_kph + " khp");
         }else{
-            setWindSpeed(weatherData?.current?.wind_mph + "mph");
+            setWindSpeed(weatherData?.current?.wind_mph + " mph");
+        }
+
+        // Visibility
+        if(typeVisibility === "km"){
+            setVisibility(weatherData?.current?.vis_km + " km");
+        }else{
+            setVisibility(weatherData?.current?.vis_miles + " miles");
         }
     }
 
@@ -147,6 +152,26 @@ function App() {
         }
     }
 
+    function switchWindSpeed(){
+        if(windSpeedType == "kph"){
+            setWindSpeed(weatherData?.current?.wind_mph + " mph");
+            setWindSpeedType("mph");
+        }else{
+            setWindSpeed(weatherData?.current?.wind_kph + " kph");
+            setWindSpeedType("kph");
+        }
+    }
+
+    function switchVisibility(){
+        if(visibility == "km"){
+            setVisibility(weatherData?.current?.vis_miles + " miles");
+            setTypeVisibility("miles");
+        }else{
+            setVisibility(weatherData?.current?.vis_km + " km");
+            setTypeVisibility("km");
+        }
+    }
+
     // Calling initial functions
     useEffect(() => { // useEffect avoid repeat several times
         getWeather();
@@ -174,7 +199,7 @@ function App() {
                         <p style={{margin: 0, marginLeft: '10px'}} onClick={switchAirType}>{airQuality}</p>
                         {showSubAirType && (
                             <div className='popup-AirQuality'>
-                                <div>
+                                <div style={{marginRight: '10px'}}>
                                     {subAirTypes}
                                 </div>
                             </div>
@@ -183,7 +208,19 @@ function App() {
                 </div>
                 <div className='wind'>
                     <p>Wind</p>
-                    <p>{windSpeed}</p>
+                    <p onClick={switchWindSpeed}>{windSpeed}</p>
+                </div>
+                <div className='windDirection'>
+                    <p>Wind Direction</p>
+                    <p>{weatherData?.current?.wind_dir}</p>
+                </div>
+                <div className='humidity'>
+                    <p>Humidity</p>
+                    <p>{weatherData?.current?.humidity}%</p>
+                </div>
+                <div className='visibility'>
+                    <p>Visibility</p>
+                    <p onClick={switchVisibility}>{visibility}</p>
                 </div>
             </div>
         </div>
