@@ -3,6 +3,10 @@
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+</br>
+
+[![CodeVersion](https://img.shields.io/badge/Code_Version-0.13-pink.svg)]()
+[![PackageVersion](https://img.shields.io/badge/Package_Version-0.0-pink.svg)]()
 </div>
 <!-- -------------------------------------- -->
 
