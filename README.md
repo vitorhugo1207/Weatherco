@@ -13,7 +13,6 @@
 <h2 align="center">Weatherco</h2>
 
 <!-- -------------------------------------- -->
----
 
 <p align="center"> 
 Weather is a aplication made with ReactJS and ElectronJS. The porpuse of this aplication is show to you forecast and actual weather in a way light and simple.
