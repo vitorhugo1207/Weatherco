@@ -2,10 +2,10 @@ const { reject } = require('assert');
 const { resolve } = require('path');
 
 export class Weather{
-    constructor(){
+    constructor(city){
         this.url = "https://api.weatherapi.com/v1/forecast.json?";
         this.apikey = this.getApiKey();
-        this.city = 'getulina'; // Forward it's call a function to get the geolocalization
+        this.city = city; // Forward it's call a function to get the geolocalization
     }
 
     getApiKey(){
