@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 </br>
 
-[![CodeVersion](https://img.shields.io/badge/Code_Version-2023.07.20.4-pink.svg)]()
+[![CodeVersion](https://img.shields.io/badge/Code_Version-2023.07.25.0-pink.svg)]()
 [![PackageVersion](https://img.shields.io/badge/Package_Version-0.0-pink.svg)]()
 </div>
 <!-- -------------------------------------- -->
