@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './Home.css';
 import {Weather} from './weather';
-import { HashRouter, Route, Routes, Link, Switch } from "react-router-dom";
+import { HashRouter, Route, Routes, Link } from "react-router-dom";
 import Search from './Search';
 
 // npm start
@@ -218,11 +218,11 @@ function Home() {
                 <HashRouter>
                     <div>
                         <div>
-                            <Link to="/home"><h2>testHome</h2></Link>
-                            <Link to="/search"><h2>testSearch</h2></Link>
+                            <Link to="/search"><h2>test</h2></Link>
                         </div>
                         <Routes>
-                            <Route path='/search' element={<Search/>}/>
+                            <Route path='/' component={<Home/>} />
+                            <Route path='/search' element={<Search/>} />
                         </Routes>
                     </div>
                 </HashRouter>
