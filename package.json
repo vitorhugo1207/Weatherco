@@ -1,29 +1,36 @@
 {
   "name": "weatherco",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@craco/craco": "^7.1.0",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-script": "^2.0.5",
-    "react-scripts": "5.0.1"
-  },
+  "version": "1.0.0",
+  "description": "<h2 align=\"center\">Weatherco</h2>\r <div align=\"center\">",
+  "main": "public/electron.js",
   "scripts": {
+    "test": "react-scripts test",
     "startReact": "react-script start",
     "start": "electron .",
     "build": "craco build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitorhugo1207/Weatherco.git"
+  },
+  "author": "vitorhugo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vitorhugo1207/Weatherco/issues"
+  },
+  "homepage": "./",
+  "dependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "craco": "^0.0.3",
+    "electron": "^25.3.1",
+    "electron-packager": "^17.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.2",
+    "react-scripts": "^5.0.1",
+    "webpack-dev-middleware": "^6.1.1",
+    "webpack-node-externals": "^3.0.0"
   },
   "browserslist": {
     "production": [
@@ -36,15 +43,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "copy-webpack-plugin": "^11.0.0",
-    "electron": "^24.1.2",
-    "electron-packager": "^17.1.1",
-    "react-router-dom": "^6.14.2",
-    "webpack-dev-middleware": "^6.1.0",
-    "webpack-node-externals": "^3.0.0"
-  },
-  "main": "public/electron.js",
-  "homepage": "./"
+  }
 }
