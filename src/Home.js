@@ -218,7 +218,8 @@ function Home() {
                 <HashRouter>
                     <div>
                         <div>
-                            <Link to="/search"><h2>test</h2></Link>
+                            <Link to="/"><h2>Home</h2></Link>
+                            <Link to="/search"><h2>Search</h2></Link>
                         </div>
                         <Routes>
                             <Route path='/' component={<Home/>} />
