@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './Home.css';
 import {Weather} from './weather';
-import { HashRouter, Route, Routes, NavLink, Navigate } from "react-router-dom";
+import { HashRouter, Route, Routes, NavLink, Link } from "react-router-dom";
 import Search from './Search';
 
 // npm start
@@ -217,12 +217,12 @@ function Home() {
             <div className='head'>
                 <HashRouter>
                     <Routes>
-                        <Route path='/' component={<Home/>} />
+                        <Route path='/' Component={<Home/>} />
                         <Route path='/search' element={<Search/>} />
                     </Routes>
-                    <NavLink to='/search'>Search</NavLink>
-                    <br/>
-                    <NavLink to='/'>Home</NavLink>
+                    <Link to='/search'>Search</Link>
+                    
+                    <Link to='/'>Home</Link>
                 </HashRouter>
                 <p className='location' onMouseEnter={() => setChangeLocationPopup(true)} onMouseLeave={() => setChangeLocationPopup(false)}>{weatherData?.location?.name} - {weatherData?.location?.region}</p>
                 {changeLocationPopup && (
