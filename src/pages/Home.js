@@ -29,7 +29,7 @@ function Home() {
     const[typePrecipitation, setTypePrecipitation] = useState('mm');
 
     async function getWeather(){
-        let weather = new Weather(city);
+        const weather = new Weather(city);
         const response = await weather.forecastJSON();
         setWeatherData(response);
         setLoading(false); // semaphore to run initDatas() after getWeather receve API response
@@ -210,8 +210,7 @@ function Home() {
     return (
         <div className='main'>
             <div className='head'>
-                <Link to={"/search"}>Search</Link>
-                <p className='location' onMouseEnter={() => setChangeLocationPopup(true)} onMouseLeave={() => setChangeLocationPopup(false)}>{weatherData?.location?.name} - {weatherData?.location?.region}</p>
+                <Link to={"/search"} className='linkChangeLocation'><p className='location' onMouseEnter={() => setChangeLocationPopup(true)} onMouseLeave={() => setChangeLocationPopup(false)}>{weatherData?.location?.name} - {weatherData?.location?.region}</p></Link>
                 {changeLocationPopup && (
                     <div className='popup-location'>
                         <p style={{margin: '16px', backgroundColor: '#555', fontSize: '16px'}}>Click to change location</p>
