@@ -3,7 +3,8 @@ const { resolve } = require('path');
 
 export class Weather{
     constructor(city){
-        this.url = "https://api.weatherapi.com/v1/forecast.json?";
+        this.forecastURL = "https://api.weatherapi.com/v1/forecast.json?";
+        this.cityURL = "https://api.weatherapi.com/v1/search.json?";
         this.apikey = this.getApiKey();
         this.city = city; // Forward it's call a function to get the geolocalization
     }
@@ -20,10 +21,30 @@ export class Weather{
         return this.apikey = this.apikey.key;
     }
 
+    getCity(){
+        return new Promise((resolve, reject) =>{
+            const request = require('https');
+
+            request.get(`${this.cityURL}key=${this.apikey}&q=${this.city}`, (resp) => {
+                let data = '';
+
+                resp.on('data', (chunk) => {
+                    data += chunk;
+                })
+
+                resp.on('end', () => {
+                    resolve(JSON.parse(data));
+                })
+            }).on("error", (err) => {
+                reject(err);
+            })
+        })
+    }
+
     forecastJSON(){
         return new Promise((resolve, reject) => { // callback function, resolve is a function will return my value, reject is a function will return error. This function is async then when for call it use async/await.
             const request = require('https');
-            request.get(`${this.url}key=${this.apikey}&q=${this.city}&days=3&aqi=yes&alerts=yes`, (resp) => {
+            request.get(`${this.forecastURL}key=${this.apikey}&q=${this.city}&days=3&aqi=yes&alerts=yes`, (resp) => {
                 let data = '';
 
                 // Chunk of data has been received.
