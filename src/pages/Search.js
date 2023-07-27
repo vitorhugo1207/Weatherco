@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom'
-import "./Search.css";
-import { Weather } from "./weather";
+import "../css/Search.css";
+import { Weather } from "../API/weather";
 
 const Search = () =>{
+    get
+
     return(
         <div>
             <p>This is Search page!!!</p>

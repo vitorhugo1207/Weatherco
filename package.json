@@ -8,7 +8,9 @@
     "startReact": "react-script start",
     "start": "electron .",
     "build": "craco build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "ikki": "cls & npm run build & copy APIKEY.json build",
+    "compile": "npm exec electron-packager ./ Weatherco --platform=win32 --arch=x64"
   },
   "repository": {
     "type": "git",

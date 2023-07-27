@@ -1,12 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import './Home.css';
-import {Weather} from './weather';
-import { HashRouter, Route, Routes, Link } from "react-router-dom";
-import Search from './Search';
-
-// npm start
-// cls; npm run build; copy APIKEY.json build
-// npm exec electron-packager "C:\Users\vitor\Script\FullStack Projects\weatherco" Weatherco --platform=win32 --arch=x64 
+import '../css/Home.css';
+import {Weather} from '../API/weather';
+import { Link } from "react-router-dom";
 
 function Home() {
     const [weatherData, setWeatherData] = useState('');
@@ -216,9 +211,6 @@ function Home() {
         <div className='main'>
             <div className='head'>
                 <Link to={"/search"}>Search</Link>
-                <br/>
-                <Link to={"/"}>Home</Link>
-
                 <p className='location' onMouseEnter={() => setChangeLocationPopup(true)} onMouseLeave={() => setChangeLocationPopup(false)}>{weatherData?.location?.name} - {weatherData?.location?.region}</p>
                 {changeLocationPopup && (
                     <div className='popup-location'>
