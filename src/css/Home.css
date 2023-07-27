@@ -111,3 +111,8 @@
     border-style: solid;
     border-color: #555 transparent transparent transparent;
 }
+
+.linkChangeLocation{
+    text-decoration: none;
+    color: inherit;
+}
