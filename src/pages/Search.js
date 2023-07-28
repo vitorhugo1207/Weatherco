@@ -15,7 +15,7 @@ const Search = () =>{
         for(let x = 0; x < cityResp.length; x++){
             const newOption = React.createElement("option", {value:`${cityResp[x]?.name}, ${cityResp[x]?.region}`}, `${cityResp[x]?.name}, ${cityResp[x]?.region}`);
             // setCitiesElements(citiesElements.concat(newOption));
-            // return newOption;
+            // return newOption
         }
     }
 
