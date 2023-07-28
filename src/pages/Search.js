@@ -1,16 +1,30 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
 import "../css/Search.css";
 import { Weather } from "../API/weather";
 
 const Search = () =>{
-    const [city, setCity] = useState('');
-    const [citySearch, setCitySearch] = useState('');
+    const [cityResp, setCityResp] = useState('');
+    const [citiesElements, setCitiesElements] = useState('');
 
-    async function getCity(){
-        const weather = new Weather(city);
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    );
+
+    async function setSelection(){
+        for(let x = 0; x < cityResp.length; x++){
+            const newOption = React.createElement("option", {value:`${cityResp[x]?.name}, ${cityResp[x]?.region}`}, `${cityResp[x]?.name}, ${cityResp[x]?.region}`);
+            // setCitiesElements(citiesElements.concat(newOption));
+            // return newOption;
+        }
+    }
+
+    async function getCityResp(e){
+        // await delay(1000);
+        const weather = new Weather(e.target.value);
         const response = await weather.getCity();
-        setCity(response);
+        setCityResp(response);
+        await setSelection();
     }
 
     // function submit(e){
@@ -30,10 +44,12 @@ const Search = () =>{
 
             <label>
                 <input
-                    value={citySearch}
-                    onChange={e => setCitySearch(e.target.value)}
+                    onChange={e => getCityResp(e)}
                     autoFocus={true}
                 />
+                <select name="citiesElementsSelector">
+                    {citiesElements}
+                </select>
             </label>
         </div>
     )
