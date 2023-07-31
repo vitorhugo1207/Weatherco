@@ -1,44 +1,53 @@
-import React, { useState } from 'react';
-import {Link} from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import "../css/Search.css";
 import { Weather } from "../API/weather";
 
-const Search = () =>{
-    const [cityResp, setCityResp] = useState('');
+const Selection = ({cityResp}) => {
     const [citiesElements, setCitiesElements] = useState([]);
 
+    async function setSelection(){
+        // setCitiesElements(citiesElements.fill(null));
+        for(let y = 0; y < citiesElements.length; y++){
+            // citiesElements.slice(y, 1);
+            setCitiesElements(citiesElements.filter(citiesElements[y]))
+        }
+
+        for(let x = 0; x < cityResp.length; x++){
+            let newOption = React.createElement("option", {value:`${cityResp[x]?.name}, ${cityResp[x]?.region}`}, `${cityResp[x]?.name}, ${cityResp[x]?.region}`);
+            setCitiesElements([...citiesElements, newOption]); // array spread
+        }
+
+        console.log("-----------------------");
+        console.log(cityResp);
+        console.log(citiesElements);
+        console.log("-----------------------");
+    }
+
+    useEffect(() => {
+        setSelection();
+    }, [cityResp])
+
+    return(
+        <select name="citiesElementsSelector">
+            {citiesElements}
+        </select>
+    )
+}
+
+const Search = () =>{
+    const [cityResp, setCityResp] = useState('');
+    
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
     );
-
-    async function setSelection(){
-        for(let x = 0; x < cityResp.length; x++){
-            let newOption = React.createElement("option", {value:`${cityResp[x]?.name}, ${cityResp[x]?.region}`}, `${cityResp[x]?.name}, ${cityResp[x]?.region}`);
-            setCitiesElements(citiesElements.concat(newOption));
-        }
-        console.log(cityResp);
-        console.log("--");
-        console.log(citiesElements);
-    }
 
     async function getCityResp(e){
         // await delay(1000);
         const weather = new Weather(e.target.value);
         const response = await weather.getCity();
         setCityResp(response);
-        await setSelection();
     }
-
-    // function submit(e){
-    //     e.preventDefault();
-
-    //     const form = e.target;
-    //     const formData = new FormData(form);
-
-    //     const formJson = Object.fromEntries(formData.entries());
-
-    //     console.log(formJson.myInput);
-    // }
 
     return(
         <div>
@@ -49,9 +58,7 @@ const Search = () =>{
                     onChange={e => getCityResp(e)}
                     autoFocus={true}
                 />
-                <select name="citiesElementsSelector">
-                    {citiesElements}
-                </select>
+                <Selection cityResp={cityResp}/>
             </label>
         </div>
     )

@@ -3,6 +3,10 @@ import '../css/Home.css';
 import {Weather} from '../API/weather';
 import { Link } from "react-router-dom";
 
+// !!! Restruture this page
+// !!! Restruture this page
+// !!! Restruture this page
+
 function Home() {
     const [weatherData, setWeatherData] = useState('');
     const [loading, setLoading] = useState(true); // semaphore to run initDatas() after getWeather receve API response
@@ -34,10 +38,6 @@ function Home() {
         setWeatherData(response);
         setLoading(false); // semaphore to run initDatas() after getWeather receve API response
     }
-
-    // async function searchCity(){
-    //     let weather = new Weather(SearchCity);
-    // }
 
     function switchTypeTemp(){
         if(typeTemp === "C"){
