@@ -5,7 +5,7 @@ import { Weather } from "../API/weather";
 
 const Search = () =>{
     const [cityResp, setCityResp] = useState('');
-    const [citiesElements, setCitiesElements] = useState('');
+    const [citiesElements, setCitiesElements] = useState([]);
 
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
@@ -13,10 +13,12 @@ const Search = () =>{
 
     async function setSelection(){
         for(let x = 0; x < cityResp.length; x++){
-            const newOption = React.createElement("option", {value:`${cityResp[x]?.name}, ${cityResp[x]?.region}`}, `${cityResp[x]?.name}, ${cityResp[x]?.region}`);
-            // setCitiesElements(citiesElements.concat(newOption));
-            // return newOption
+            let newOption = React.createElement("option", {value:`${cityResp[x]?.name}, ${cityResp[x]?.region}`}, `${cityResp[x]?.name}, ${cityResp[x]?.region}`);
+            setCitiesElements(citiesElements.concat(newOption));
         }
+        console.log(cityResp);
+        console.log("--");
+        console.log(citiesElements);
     }
 
     async function getCityResp(e){
