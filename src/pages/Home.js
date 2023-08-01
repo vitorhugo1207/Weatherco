@@ -3,41 +3,25 @@ import '../css/Home.css';
 import {Weather} from '../API/weather';
 import { Link } from "react-router-dom";
 
-// !!! Restruture this page
-// !!! Restruture this page
-// !!! Restruture this page
-
-function Home() {
-    const [weatherData, setWeatherData] = useState('');
-    const [loading, setLoading] = useState(true); // semaphore to run initDatas() after getWeather receve API response
-    
-    const [city, setCity] = useState("getulina");
+function Location({ weatherData }){
     const [changeLocationPopup, setChangeLocationPopup] = useState(false);
 
+    return (
+            <div className='locationDiv'>
+                <Link to={"/search"} className='linkChangeLocation'><p className='location' onMouseEnter={() => setChangeLocationPopup(true)} onMouseLeave={() => setChangeLocationPopup(false)}>{weatherData?.location?.name} - {weatherData?.location?.region}</p></Link>
+                {changeLocationPopup && (
+                    <div className='popup-location'>
+                        <p style={{margin: '16px', backgroundColor: '#555', fontSize: '16px'}}>Click to change location</p>
+                    </div>
+                )}
+            </div>
+    )
+}
+
+function Temperature({ weatherData,  loading }){
     const [temp, setTemp] = useState('');
     const [feelsLike, setFeelsLike] = useState('');
     const [typeTemp, setTypeTemp] = useState("C");
-
-    const [airQuality, setAirQuality] = useState('');
-    const [typeAirQuality, setTypeAirQuality] = useState("US_EPA");
-    const [showSubAirType, setShowSubAirType] = useState(false);
-    const [subAirTypes, setSubAirTypes] = useState('');
-
-    const [windSpeed, setWindSpeed] = useState('');
-    const [windSpeedType, setWindSpeedType] = useState('kph'); 
-
-    const[visibility, setVisibility] = useState('');
-    const[typeVisibility, setTypeVisibility] = useState('km');
-
-    const[precipitation, setPrecipitation] = useState('');
-    const[typePrecipitation, setTypePrecipitation] = useState('mm');
-
-    async function getWeather(){
-        const weather = new Weather(city);
-        const response = await weather.forecastJSON();
-        setWeatherData(response);
-        setLoading(false); // semaphore to run initDatas() after getWeather receve API response
-    }
 
     function switchTypeTemp(){
         if(typeTemp === "C"){
@@ -51,9 +35,8 @@ function Home() {
             setTypeTemp("C");
         }
     }
-    
+
     async function initDatas(){
-        // Temp
         if(typeTemp === "C"){
             setTemp(weatherData?.current?.temp_c + "°C");
             setFeelsLike(weatherData?.current?.feelslike_c + "°C");
@@ -61,8 +44,29 @@ function Home() {
             setTemp(weatherData?.current?.temp_f + "°F");
             setFeelsLike(weatherData?.current?.feelslike_f + "°F");
         }
+    }
 
-        // Air Quality
+    useEffect(() => { 
+        if(!loading){ // semaphore to run initDatas() after getWeather receve API response
+            initDatas();
+        }
+    }, [loading]); // if I have to use some external object in useEffect use dependence of useEffect
+
+    return(
+        <>
+            <p className='temp' onClick={switchTypeTemp}>{temp}</p>
+            <p className='feelslike' onClick={switchTypeTemp}>Feels Like: {feelsLike}</p>
+        </>
+    )
+}
+
+function AirQuality({ weatherData, loading }){
+    const [airQuality, setAirQuality] = useState('');
+    const [typeAirQuality, setTypeAirQuality] = useState("US_EPA");
+    const [showSubAirType, setShowSubAirType] = useState(false);
+    const [subAirTypes, setSubAirTypes] = useState('');
+
+    function initDatas(){
         if(typeAirQuality === "US_EPA"){
             setAirQuality(weatherData?.current?.air_quality["us-epa-index"]);
             setSubAirTypes(
@@ -74,7 +78,7 @@ function Home() {
                 <li className='ListAirQuality'>5 means Very Unhealthy</li>
                 <li className='ListAirQuality'>6 means Hazardous</li>
             </ul>
-        );
+            );
         }else{
             setAirQuality(weatherData?.current?.air_quality["gb-defra-index"]);
             setSubAirTypes(
@@ -91,27 +95,6 @@ function Home() {
                     <li className='ListAirQuality'>10 - Very High</li>
                 </ul>
             );
-        }
-
-        // Wind
-        if(windSpeedType === "kph"){
-            setWindSpeed(weatherData?.current?.wind_kph + " khp");
-        }else{
-            setWindSpeed(weatherData?.current?.wind_mph + " mph");
-        }
-
-        // Visibility
-        if(typeVisibility === "km"){
-            setVisibility(weatherData?.current?.vis_km + " km");
-        }else{
-            setVisibility(weatherData?.current?.vis_miles + " miles");
-        }
-
-        // Precipitation
-        if(typePrecipitation === "mm"){
-            setPrecipitation(weatherData?.current?.precip_mm + " mm");
-        }else{
-            setPrecipitation(weatherData?.current?.precip_in + " in");
         }
     }
 
@@ -165,6 +148,42 @@ function Home() {
         }
     }
 
+    useEffect(() => { 
+        if(!loading){ // semaphore to run initDatas() after getWeather receve API response
+            initDatas();
+        }
+    }, [loading]); // if I have to use some external object in useEffect use dependence of useEffect
+
+    return(
+        <div className='airQuality'>
+            <p>Air Quality</p>
+            <div className='statusAirDiv' onMouseEnter={() => setShowSubAirType(true)} onMouseLeave={() => setShowSubAirType(false)}>
+                <div className='statusAirIcon' style={{backgroundColor: statusAirColor()}} onMouseEnter={() => setShowSubAirType(false)} onMouseLeave={() => setShowSubAirType(false)}></div>
+                <p style={{margin: 0, marginLeft: '10px'}} onClick={switchAirType}>{airQuality}</p>
+                {showSubAirType && (
+                    <div className='popup-AirQuality'>
+                        <div style={{marginRight: '10px'}}>
+                            {subAirTypes}
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}
+
+function Wind({ weatherData, loading }){
+    const [windSpeed, setWindSpeed] = useState('');
+    const [windSpeedType, setWindSpeedType] = useState('kph'); 
+
+    function initDatas(){
+        if(windSpeedType === "kph"){
+            setWindSpeed(weatherData?.current?.wind_kph + " khp");
+        }else{
+            setWindSpeed(weatherData?.current?.wind_mph + " mph");
+        }
+    }
+
     function switchWindSpeed(){
         if(windSpeedType == "kph"){
             setWindSpeed(weatherData?.current?.wind_mph + " mph");
@@ -172,6 +191,32 @@ function Home() {
         }else{
             setWindSpeed(weatherData?.current?.wind_kph + " kph");
             setWindSpeedType("kph");
+        }
+    }
+
+    useEffect(() => { 
+        if(!loading){ // semaphore to run initDatas() after getWeather receve API response
+            initDatas();
+        }
+    }, [loading]); // if I have to use some external object in useEffect use dependence of useEffect
+
+    return(
+    <div className='wind'>
+        <p>Wind</p>
+        <p onClick={switchWindSpeed}>{windSpeed}</p>
+    </div>
+    )
+}
+
+function Visibility({ weatherData, loading }){
+    const[visibility, setVisibility] = useState('');
+    const[typeVisibility, setTypeVisibility] = useState('km');
+    
+    function initDatas(){
+        if(typeVisibility === "km"){
+            setVisibility(weatherData?.current?.vis_km + " km");
+        }else{
+            setVisibility(weatherData?.current?.vis_miles + " miles");
         }
     }
 
@@ -185,6 +230,32 @@ function Home() {
         }
     }
 
+    useEffect(() => { 
+        if(!loading){ // semaphore to run initDatas() after getWeather receve API response
+            initDatas();
+        }
+    }, [loading]); // if I have to use some external object in useEffect use dependence of useEffect
+
+    return(
+        <div className='visibility'>
+            <p>Visibility</p>
+            <p onClick={switchVisibility}>{visibility}</p>
+        </div>
+    )
+}
+
+function Precipitation({ weatherData, loading }){
+    const[precipitation, setPrecipitation] = useState('');
+    const[typePrecipitation, setTypePrecipitation] = useState('mm');
+
+    async function initDatas(){
+        if(typePrecipitation === "mm"){
+            setPrecipitation(weatherData?.current?.precip_mm + " mm");
+        }else{
+            setPrecipitation(weatherData?.current?.precip_in + " in");
+        }
+    }
+
     function switchPrecipitation(){
         if(typePrecipitation == "mm"){
             setPrecipitation(weatherData?.current?.precip_in + " in");
@@ -195,74 +266,69 @@ function Home() {
         }
     }
 
-    // Calling initial functions
-    useEffect(() => { // useEffect avoid repeat several times
-        getWeather();
-    }, [])
-
     useEffect(() => { 
         if(!loading){ // semaphore to run initDatas() after getWeather receve API response
             initDatas();
         }
     }, [loading]); // if I have to use some external object in useEffect use dependence of useEffect
-    
-    // as can see in popup airType when set some variable use arrow function to avoid error
-    return (
-        <div className='main'>
-            <div className='head'>
-                <Link to={"/search"} className='linkChangeLocation'><p className='location' onMouseEnter={() => setChangeLocationPopup(true)} onMouseLeave={() => setChangeLocationPopup(false)}>{weatherData?.location?.name} - {weatherData?.location?.region}</p></Link>
-                {changeLocationPopup && (
-                    <div className='popup-location'>
-                        <p style={{margin: '16px', backgroundColor: '#555', fontSize: '16px'}}>Click to change location</p>
-                    </div>
-                )}
-                
-                <p className='temp' onClick={switchTypeTemp}>{temp}</p>
-                <p className='feelslike' onClick={switchTypeTemp}>Feels Like: {feelsLike}</p>
-            </div>
-            <div className='detail'>
-                <div className='airQuality'>
-                    <p>Air Quality</p>
-                    <div className='statusAirDiv' onMouseEnter={() => setShowSubAirType(true)} onMouseLeave={() => setShowSubAirType(false)}>
-                        <div className='statusAirIcon' style={{backgroundColor: statusAirColor()}} onMouseEnter={() => setShowSubAirType(false)} onMouseLeave={() => setShowSubAirType(false)}></div>
-                        <p style={{margin: 0, marginLeft: '10px'}} onClick={switchAirType}>{airQuality}</p>
-                        {showSubAirType && (
-                            <div className='popup-AirQuality'>
-                                <div style={{marginRight: '10px'}}>
-                                    {subAirTypes}
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </div>
 
-                <div className='wind'>
-                    <p>Wind</p>
-                    <p onClick={switchWindSpeed}>{windSpeed}</p>
-                </div>
-
-                <div className='windDirection'>
-                    <p>Wind Direction</p>
-                    <p>{weatherData?.current?.wind_dir}</p>
-                </div>
-
-                <div className='humidity'>
-                    <p>Humidity</p>
-                    <p>{weatherData?.current?.humidity}%</p>
-                </div>
-
-                <div className='visibility'>
-                    <p>Visibility</p>
-                    <p onClick={switchVisibility}>{visibility}</p>
-                </div>
-                
-                <div className='precipitation'>
-                    <p>Precipitation</p>
-                    <p onClick={switchPrecipitation}>{precipitation}</p>
-                </div>
-            </div>
+    return(
+        <div className='precipitation'>
+            <p>Precipitation</p>
+            <p onClick={switchPrecipitation}>{precipitation}</p>
         </div>
-    );
+    )
 }
 
-export default Home;
+function Humidity({ weatherData }){
+    return(
+        <div className='humidity'>
+            <p>Humidity</p>
+            <p>{weatherData?.current?.humidity}%</p>
+        </div>
+    )
+}
+
+function WindDirection({ weatherData }){
+    return(
+        <div className='windDirection'>
+            <p>Wind Direction</p>
+            <p>{weatherData?.current?.wind_dir}</p>
+        </div>
+    )
+}
+
+export default function Home() {
+    const [weatherData, setWeatherData] = useState('');
+    const [loading, setLoading] = useState(true); // semaphore to run initDatas() after getWeather receve API response
+    const [city, setCity] = useState("getulina");
+
+    async function getWeather(){
+        const weather = new Weather(city);
+        const response = await weather.forecastJSON();
+        setWeatherData(response);
+        setLoading(false);
+    }
+
+    useEffect(() => { // useEffect avoid repeat several times
+        getWeather();
+    }, [])
+    
+    return (
+        <>
+            <div className='head'>
+                <Location weatherData={weatherData}/>
+                <Temperature weatherData={weatherData} loading={loading}/>
+            </div>
+
+            <div className='detail'>
+                <AirQuality weatherData={weatherData} loading={loading}/>
+                <Wind weatherData={weatherData} loading={loading}/>
+                <WindDirection weatherData={weatherData}/>
+                <Humidity weatherData={weatherData}/>
+                <Precipitation weatherData={weatherData} loading={loading}/>
+                <Visibility weatherData={weatherData} loading={loading}/>
+            </div>
+        </>
+    );
+}
