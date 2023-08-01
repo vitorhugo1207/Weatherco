@@ -5,31 +5,22 @@ import { Weather } from "../API/weather";
 
 const Selection = ({cityResp}) => {
     const [citiesElements, setCitiesElements] = useState([]);
-
-    async function setSelection(){
-        // setCitiesElements(citiesElements.fill(null));
-        for(let y = 0; y < citiesElements.length; y++){
-            // citiesElements.slice(y, 1);
-            setCitiesElements(citiesElements.filter(citiesElements[y]))
-        }
+    
+    function setSelection(){
+        const newOption = [];
 
         for(let x = 0; x < cityResp.length; x++){
-            let newOption = React.createElement("option", {value:`${cityResp[x]?.name}, ${cityResp[x]?.region}`}, `${cityResp[x]?.name}, ${cityResp[x]?.region}`);
-            setCitiesElements([...citiesElements, newOption]); // array spread
+            newOption.push(React.createElement("option", {value:`${cityResp[x]?.name}, ${cityResp[x]?.region}`}, `${cityResp[x]?.name}, ${cityResp[x]?.region}`));
         }
-
-        console.log("-----------------------");
-        console.log(cityResp);
-        console.log(citiesElements);
-        console.log("-----------------------");
+        setCitiesElements(newOption);
     }
 
     useEffect(() => {
         setSelection();
     }, [cityResp])
-
+    
     return(
-        <select name="citiesElementsSelector">
+        <select name="citiesElementsSelector" key={citiesElements}>
             {citiesElements}
         </select>
     )
@@ -37,13 +28,8 @@ const Selection = ({cityResp}) => {
 
 const Search = () =>{
     const [cityResp, setCityResp] = useState('');
-    
-    const delay = ms => new Promise(
-        resolve => setTimeout(resolve, ms)
-    );
 
     async function getCityResp(e){
-        // await delay(1000);
         const weather = new Weather(e.target.value);
         const response = await weather.getCity();
         setCityResp(response);
@@ -55,7 +41,9 @@ const Search = () =>{
 
             <label>
                 <input
-                    onChange={e => getCityResp(e)}
+                    onChange={(e) => {
+                        setTimeout(() => getCityResp(e), 1000);
+                    }}
                     autoFocus={true}
                 />
                 <Selection cityResp={cityResp}/>

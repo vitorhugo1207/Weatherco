@@ -168,7 +168,7 @@ function Home() {
     function switchWindSpeed(){
         if(windSpeedType == "kph"){
             setWindSpeed(weatherData?.current?.wind_mph + " mph");
-            setWindSpeedType("mph");
+            setWindSpeedType("mph")
         }else{
             setWindSpeed(weatherData?.current?.wind_kph + " kph");
             setWindSpeedType("kph");
