@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom'
 import "../css/Search.css";
 import { Weather } from "../API/weather";
 
-const Selection = ({cityResp}) => {
+// todo Make a style to Search box
+// todo Make a autocomplite (https://react.dev/reference/react-dom/components/input)
+// todo Make a button arrow style
+// todo Make a enter press key event
+
+const Selection = ({ cityResp }) => {
     const [citiesElements, setCitiesElements] = useState([]);
     
     function setSelection(){
@@ -20,7 +25,7 @@ const Selection = ({cityResp}) => {
     }, [cityResp])
     
     return(
-        <select name="citiesElementsSelector" key={citiesElements}>
+        <select name="citiesElementsSelector" onClick={}>
             {citiesElements}
         </select>
     )
@@ -28,6 +33,7 @@ const Selection = ({cityResp}) => {
 
 const Search = () =>{
     const [cityResp, setCityResp] = useState('');
+    const inputRefSelection = useRef(null);
 
     async function getCityResp(e){
         const weather = new Weather(e.target.value);
