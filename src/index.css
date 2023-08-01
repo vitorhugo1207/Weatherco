@@ -12,12 +12,15 @@ body {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
+
+  color: aliceblue;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 *{
     background-color: #282c34
 }
