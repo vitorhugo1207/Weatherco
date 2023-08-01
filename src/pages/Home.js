@@ -53,10 +53,10 @@ function Temperature({ weatherData,  loading }){
     }, [loading]); // if I have to use some external object in useEffect use dependence of useEffect
 
     return(
-        <>
+        <div className='Temperature'>
             <p className='temp' onClick={switchTypeTemp}>{temp}</p>
             <p className='feelslike' onClick={switchTypeTemp}>Feels Like: {feelsLike}</p>
-        </>
+        </div>
     )
 }
 

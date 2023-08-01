@@ -1,6 +1,6 @@
 /* Geral */
 
-.locationDiv{
+.locationDiv, .Temperature{
     position: relative;
     text-align: center;
     font-size: 150%;
