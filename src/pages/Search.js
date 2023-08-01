@@ -33,7 +33,6 @@ const Selection = ({ cityResp }) => {
 
 const Search = () =>{
     const [cityResp, setCityResp] = useState('');
-    const inputRefSelection = useRef(null);
 
     async function getCityResp(e){
         const weather = new Weather(e.target.value);
