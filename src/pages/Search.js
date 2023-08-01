@@ -25,7 +25,7 @@ const Selection = ({ cityResp }) => {
     }, [cityResp])
     
     return(
-        <select name="citiesElementsSelector" onClick={}>
+        <select name="citiesElementsSelector">
             {citiesElements}
         </select>
     )
