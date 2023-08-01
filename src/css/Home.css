@@ -1,10 +1,6 @@
 /* Geral */
 
-.main{
-    color: aliceblue;
-}
-
-.head{
+.locationDiv{
     position: relative;
     text-align: center;
     font-size: 150%;
