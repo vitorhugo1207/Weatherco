@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/Home.css';
-import {Weather} from '../API/weather';
-import { Link } from "react-router-dom";
+import { Weather } from '../API/weather';
+import { Link, useLocation } from "react-router-dom";
 
 function Location({ weatherData }){
     const [changeLocationPopup, setChangeLocationPopup] = useState(false);
@@ -299,9 +299,10 @@ function WindDirection({ weatherData }){
 }
 
 export default function Home() {
+    const location = useLocation();
     const [weatherData, setWeatherData] = useState('');
     const [loading, setLoading] = useState(true); // semaphore to run initDatas() after getWeather receve API response
-    const [city, setCity] = useState("getulina");
+    const [city, setCity] = useState((location.state?.cityFromSearch == undefined) ? 'getulina' : location.state?.cityFromSearch); // 'getulina' will be removed when api geolocalizaton is implemented
 
     async function getWeather(){
         const weather = new Weather(city);

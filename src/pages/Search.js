@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import "../css/Search.css";
 import { Weather } from "../API/weather";
 
@@ -10,6 +10,7 @@ import { Weather } from "../API/weather";
 
 const Selection = ({ cityResp }) => {
     const [citiesElements, setCitiesElements] = useState([]);
+    const navegate = useNavigate();
     
     function setSelection(){
         const newOption = [];
@@ -23,9 +24,14 @@ const Selection = ({ cityResp }) => {
     useEffect(() => {
         setSelection();
     }, [cityResp])
-    
+
+    const navegateToHome = (e) => {
+        const form = e.target.value;
+        navegate('/', {state:{cityFromSearch: form}});
+    }
+
     return(
-        <select name="citiesElementsSelector">
+        <select name="citiesElementsSelector" onClick={(e) => {navegateToHome(e)}}>
             {citiesElements}
         </select>
     )
