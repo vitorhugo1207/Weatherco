@@ -7,14 +7,14 @@ function Location({ weatherData }){
     const [changeLocationPopup, setChangeLocationPopup] = useState(false);
 
     return (
-            <div className='locationDiv'>
-                <Link to={"/search"} className='linkChangeLocation'><p className='location' onMouseEnter={() => setChangeLocationPopup(true)} onMouseLeave={() => setChangeLocationPopup(false)}>{weatherData?.location?.name} - {weatherData?.location?.region}</p></Link>
-                {changeLocationPopup && (
-                    <div className='popup-location'>
-                        <p style={{margin: '16px', backgroundColor: '#555', fontSize: '16px'}}>Click to change location</p>
-                    </div>
-                )}
-            </div>
+        <div className='locationDiv'>
+            <Link to={"/search"} className='linkChangeLocation'><p className='location' onMouseEnter={() => setChangeLocationPopup(true)} onMouseLeave={() => setChangeLocationPopup(false)}>{weatherData?.location?.name} - {weatherData?.location?.region}</p></Link>
+            {changeLocationPopup && (
+                <div className='popup-location'>
+                    <p style={{margin: '16px', backgroundColor: '#555', fontSize: '16px'}}>Click to change location</p>
+                </div>
+            )}
+        </div>
     )
 }
 
