@@ -155,11 +155,11 @@ function AirQuality({ weatherData, loading }){
     }, [loading]); // if I have to use some external object in useEffect use dependence of useEffect
 
     return(
-        <div className='airQuality'>
+        <div className='airQuality' onMouseEnter={() => setShowSubAirType(true)} onMouseLeave={() => setShowSubAirType(false)} onClick={switchAirType}>
             <p>Air Quality</p>
-            <div className='statusAirDiv' onMouseEnter={() => setShowSubAirType(true)} onMouseLeave={() => setShowSubAirType(false)}>
-                <div className='statusAirIcon' style={{backgroundColor: statusAirColor()}} onMouseEnter={() => setShowSubAirType(false)} onMouseLeave={() => setShowSubAirType(false)}></div>
-                <p style={{margin: 0, marginLeft: '10px'}} onClick={switchAirType}>{airQuality}</p>
+            <div className='statusAirDiv'>
+                <div className='statusAirIcon' style={{backgroundColor: statusAirColor()}}></div>
+                <p style={{margin: 0, marginLeft: '10px'}}>{airQuality}</p>
                 {showSubAirType && (
                     <div className='popup-AirQuality'>
                         <div style={{marginRight: '10px'}}>
@@ -201,9 +201,9 @@ function Wind({ weatherData, loading }){
     }, [loading]); // if I have to use some external object in useEffect use dependence of useEffect
 
     return(
-    <div className='wind'>
+    <div className='wind' onClick={switchWindSpeed}>
         <p>Wind</p>
-        <p onClick={switchWindSpeed}>{windSpeed}</p>
+        <p>{windSpeed}</p>
     </div>
     )
 }
@@ -237,9 +237,9 @@ function Visibility({ weatherData, loading }){
     }, [loading]); // if I have to use some external object in useEffect use dependence of useEffect
 
     return(
-        <div className='visibility'>
+        <div className='visibility'onClick={switchVisibility}>
             <p>Visibility</p>
-            <p onClick={switchVisibility}>{visibility}</p>
+            <p >{visibility}</p>
         </div>
     )
 }
@@ -273,9 +273,9 @@ function Precipitation({ weatherData, loading }){
     }, [loading]); // if I have to use some external object in useEffect use dependence of useEffect
 
     return(
-        <div className='precipitation'>
+        <div className='precipitation' onClick={switchPrecipitation}>
             <p>Precipitation</p>
-            <p onClick={switchPrecipitation}>{precipitation}</p>
+            <p>{precipitation}</p>
         </div>
     )
 }

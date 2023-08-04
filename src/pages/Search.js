@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import "../css/Search.css";
 import { Weather } from "../API/weather";
@@ -11,11 +11,12 @@ import Select from 'react-select';
 // todo Make a enter press key event
 
 const Search = () =>{
-    const [cityResp, setCityResp] = useState('');
     const [search, setSearch] = useState([]);
+    const [input, setInput] = useState('')
     const navegate = useNavigate();
 
     const getCityResp = (inputValue) => {
+        setInput(input)
         const weather = new Weather(inputValue);
         const response = weather.getCity();
         response.then(response => {
@@ -36,14 +37,16 @@ const Search = () =>{
         <div>
             <Link to='/'>Home</Link>
 
-            <Select
-                placeholder='Type the name city'
-                options={search}
-                onInputChange={getCityResp}
-                autoFocus={true}
-                onChange={navegateToHome}
-                classNamePrefix="react-select"
-            />
+            <div class="ReactSelector">
+                <Select
+                    placeholder='Type the name city'
+                    options={search}
+                    onInputChange={getCityResp}
+                    autoFocus={true}
+                    onChange={navegateToHome}
+                    classNamePrefix="react-select"
+                />
+            </div>
         </div>
     )
 }

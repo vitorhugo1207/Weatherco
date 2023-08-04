@@ -5,13 +5,16 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 </br>
 
-[![CodeVersion](https://img.shields.io/badge/Code_Version-2023.07.25.0-pink.svg)]()
-[![PackageVersion](https://img.shields.io/badge/Package_Version-0.0-pink.svg)]()
+<!-- [![CodeVersion](https://img.shields.io/badge/Code_Version-2023.07.25.0-pink.svg)]()
+[![PackageVersion](https://img.shields.io/badge/Package_Version-0.0-pink.svg)]() -->
 </div>
 <!-- -------------------------------------- -->
 
 <p align="center"> 
 Weather is a aplication made with ReactJS and ElectronJS. The porpuse of this aplication is show to you forecast and actual weather in a way light and simple.
+</p>
+<p align="center"> 
+This projects is still initial phase, so may be error. This is not final designer.
 </p>
 <br>
 

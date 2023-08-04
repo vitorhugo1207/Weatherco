@@ -1,0 +1,22 @@
+.react-select__input, .react-select__placeholder{
+    color: aliceblue !important;
+}
+
+.react-select__control{
+    align-items: stretch !important;
+}
+
+.react-select__menu, .react-select__control{
+    width: 450px !important;
+    left: 163px !important;
+}
+
+.react-select__option--is-focused{
+    background-color: #6593d985 !important;
+}
+
+.ReactSelector{
+    position: absolute;
+    padding-top: 8%;
+    /* background: radial-gradient(circle, rgba(38,111,206,1) 0%, rgba(0,0,0,0) 100%); */
+}
