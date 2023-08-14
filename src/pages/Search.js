@@ -39,6 +39,7 @@ const Search = () =>{
 
             <div class="ReactSelector">
                 <Select
+                    spellcheck
                     placeholder='Type the name city'
                     options={search}
                     onInputChange={getCityResp}
