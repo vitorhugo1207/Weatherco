@@ -1,5 +1,6 @@
 .react-select__input, .react-select__placeholder{
     color: aliceblue !important;
+    padding-left: 4px;
 }
 
 .react-select__control{
@@ -19,4 +20,25 @@
     position: absolute;
     padding-top: 8%;
     /* background: radial-gradient(circle, rgba(38,111,206,1) 0%, rgba(0,0,0,0) 100%); */
+}
+
+.react-select__value-container{
+    justify-items: start;
+    align-items: baseline; 
+}
+
+.x{
+    position: relative;
+    top: 42px;
+    padding-left: 120px;
+}
+
+.x::after{
+    color: #fff;
+    content: "\d7";
+    font-size: 50px;
+    position: absolute;
+    text-align: center;
+    z-index: 9999999;
+    opacity: 58%;
 }

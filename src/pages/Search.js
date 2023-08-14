@@ -35,7 +35,7 @@ const Search = () =>{
 
     return(
         <div>
-            <Link to='/'>Home</Link>
+            <Link to='/'><div className='x'/></Link>
 
             <div class="ReactSelector">
                 <Select
