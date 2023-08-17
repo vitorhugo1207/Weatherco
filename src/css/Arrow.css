@@ -48,11 +48,11 @@ div.arrowRight {
 div.arrowLeft {
 	box-sizing: border-box;
 	height: 5vmin;
-	left: 95%;
+	right: 95%;
 	position: absolute;
 	top: 44%;
-	-webkit-transform: rotate(-45deg);
-	transform: rotate(45deg);
+	-webkit-transform: rotate(224deg);
+	transform: rotate(224deg);
 	width: 5vmin;
 
 	&::before {
