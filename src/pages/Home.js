@@ -13,8 +13,7 @@ function Location({ weatherData }) {
 				<p
 					className='location'
 					onMouseEnter={() => setChangeLocationPopup(true)}
-					onMouseLeave={() => setChangeLocationPopup(false)}
-				>
+					onMouseLeave={() => setChangeLocationPopup(false)}>
 					{weatherData?.location?.name} -{' '}
 					{weatherData?.location?.region}
 				</p>
@@ -26,8 +25,7 @@ function Location({ weatherData }) {
 							margin: '16px',
 							backgroundColor: '#555',
 							fontSize: '16px',
-						}}
-					>
+						}}>
 						Click to change location
 					</p>
 				</div>
@@ -185,14 +183,12 @@ function AirQuality({ weatherData, loading }) {
 			className='airQuality'
 			onMouseEnter={() => setShowSubAirType(true)}
 			onMouseLeave={() => setShowSubAirType(false)}
-			onClick={switchAirType}
-		>
+			onClick={switchAirType}>
 			<p>Air Quality</p>
 			<div className='statusAirDiv'>
 				<div
 					className='statusAirIcon'
-					style={{ backgroundColor: statusAirColor() }}
-				></div>
+					style={{ backgroundColor: statusAirColor() }}></div>
 				<p style={{ margin: 0, marginLeft: '10px' }}>{airQuality}</p>
 				{showSubAirType && (
 					<div className='popup-AirQuality'>
@@ -362,7 +358,7 @@ export default function Home() {
 				<Temperature weatherData={weatherData} loading={loading} />
 			</div>
 
-			<Link to={'/forecast'}>
+			<Link to={'/forecast'} state={{data: weatherData}}>
 				<ArrowRight />
 			</Link>
 
