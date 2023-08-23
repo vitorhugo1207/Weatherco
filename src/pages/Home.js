@@ -4,6 +4,8 @@ import { Weather } from '../API/weather';
 import { Link, useLocation } from 'react-router-dom';
 import ArrowRight from './Arrow';
 
+// TODO put a pen icon side Location
+
 function Location({ weatherData }) {
 	const [changeLocationPopup, setChangeLocationPopup] = useState(false);
 

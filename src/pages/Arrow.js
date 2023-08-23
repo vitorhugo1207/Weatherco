@@ -4,7 +4,7 @@ import '../css/Arrow.css';
 export default function ArrowRight(){
     return(
         <>
-            <div class="arrowRight"></div>
+            <div className="arrowRight"></div>
         </>
     )
 }
@@ -12,7 +12,7 @@ export default function ArrowRight(){
 export const ArrowLeft = () => {
     return(
         <>
-            <div class="arrowLeft"></div>            
+            <div className="arrowLeft"></div>            
         </>
     )
 }

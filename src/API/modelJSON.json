@@ -49,7 +49,7 @@
         }
     },
     "forecast": {
-        "forecastday": [
+        "forecastday": [    
             {
                 "date": "2023-07-19",
                 "date_epoch": 1689724800,
