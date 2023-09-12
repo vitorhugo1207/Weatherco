@@ -1,0 +1,17 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.cards {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.card {
+	background-color: hsla(0,0%,100%,.19);
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+}
