@@ -10,6 +10,7 @@ export default function Forecast() {
 	const [cards, setCards] = useState([]);
 	const [temp, setTemp] = useState("");
 	const [tempType, setTempType] = useState("C");
+	const [tempForecast, setTempForecast] = useState("C");
 
 	function card() {
 		setCards([]);
@@ -18,12 +19,25 @@ export default function Forecast() {
 		const forecasts = weatherdata?.forecast?.forecastday;
 
 		for (const forecast of forecasts) {
+			setTempForecast(forecast);
+			initTemp();
+
 			const newCard = (
 				<div className="card">
 					<h1 className='cardTitle'>
 						{JSON.stringify(forecast?.date).slice(6).replace('-', ' / ').replace('"', '')}
 					</h1>
-					<p onClick={changeTempType(forecast)}>{temp}</p>
+					<p onClick={changeTempType}>{() => {
+						if (tempType == "F") {
+							setTempType("F");
+							console.log("aaa")
+							return `${JSON.stringify(tempForecast?.day?.avgtemp_f)}°F`;
+						} else {
+							console.log("aaa")
+							setTempType("C");
+							return (`${JSON.stringify(tempForecast?.day?.avgtemp_c)}°C`);
+						}
+					}}</p>
 				</div>
 			);
 			newCards.push(newCard);
@@ -31,19 +45,28 @@ export default function Forecast() {
 		setCards(newCards);
 	}
 
-	function changeTempType(forecast) {
+	function changeTempType() {
 		if (tempType == "C") {
 			setTempType("F");
-			setTemp(`${JSON.stringify(forecast?.day?.avgtemp_f)}°F`);
+			setTemp(`${JSON.stringify(tempForecast?.day?.avgtemp_f)}°F`);
 		} else {
 			setTempType("C");
-			setTemp(`${JSON.stringify(forecast?.day?.avgtemp_c)}°C`);
+			setTemp(`${JSON.stringify(tempForecast?.day?.avgtemp_c)}°C`);
+		}
+	}
+
+	function initTemp() {
+		if (tempType == "F") {
+			setTempType("F");
+			return `${JSON.stringify(tempForecast?.day?.avgtemp_f)}°F`;
+		} else {
+			setTempType("C");
+			return (`${JSON.stringify(tempForecast?.day?.avgtemp_c)}°C`);
 		}
 	}
 
 	useEffect(() => {
 		card();
-		changeTempType();
 	}, []);
 
 	return (
