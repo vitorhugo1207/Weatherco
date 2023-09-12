@@ -8,6 +8,8 @@ export default function Forecast() {
 	const location = useLocation();
 	const [weatherdata, setWeatherdata] = useState(location?.state?.data);
 	const [cards, setCards] = useState([]);
+	const [temp, setTemp] = useState("");
+	const [tempType, setTempType] = useState("C");
 
 	function card() {
 		setCards([]);
@@ -18,9 +20,10 @@ export default function Forecast() {
 		for (const forecast of forecasts) {
 			const newCard = (
 				<div className="card">
-					<h1>
-						{JSON.stringify(forecast?.date).slice(6).replace('-', '/').replace('"', '')}
+					<h1 className='cardTitle'>
+						{JSON.stringify(forecast?.date).slice(6).replace('-', ' / ').replace('"', '')}
 					</h1>
+					<p onClick={changeTempType(forecast)}>{temp}</p>
 				</div>
 			);
 			newCards.push(newCard);
@@ -28,13 +31,24 @@ export default function Forecast() {
 		setCards(newCards);
 	}
 
+	function changeTempType(forecast) {
+		if (tempType == "C") {
+			setTempType("F");
+			setTemp(`${JSON.stringify(forecast?.day?.avgtemp_f)}°F`);
+		} else {
+			setTempType("C");
+			setTemp(`${JSON.stringify(forecast?.day?.avgtemp_c)}°C`);
+		}
+	}
+
 	useEffect(() => {
 		card();
+		changeTempType();
 	}, []);
 
 	return (
 		<>
-			<div className='Cards'>{cards}</div>
+			<div className='cards'>{cards}</div>
 			<Link to={'/'}>
 				<ArrowLeft />
 			</Link>
