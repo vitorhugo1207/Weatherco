@@ -12,6 +12,7 @@
 .react-select__control {
 	width: 450px !important;
 	left: 163px !important;
+	cursor: text;
 }
 
 .react-select__option--is-focused {
