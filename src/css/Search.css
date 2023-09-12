@@ -6,6 +6,7 @@
 
 .react-select__control {
 	align-items: stretch !important;
+	background-color: #282c34 !important
 }
 
 .react-select__menu,
