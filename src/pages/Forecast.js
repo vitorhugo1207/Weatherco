@@ -6,9 +6,10 @@ import { ArrowLeft } from './Arrow';
 
 export default function Forecast() {
 	const location = useLocation();
+
 	const [weatherdata, setWeatherdata] = useState(location?.state?.data);
 	const [cards, setCards] = useState([]);
-	const [temp, setTemp] = useState("");
+	const [temp, setTemp] = useState('');
 	const [tempType, setTempType] = useState("C");
 	const [tempForecast, setTempForecast] = useState("C");
 
@@ -20,24 +21,28 @@ export default function Forecast() {
 
 		for (const forecast of forecasts) {
 			setTempForecast(forecast);
-			initTemp();
 
 			const newCard = (
 				<div className="card">
 					<h1 className='cardTitle'>
-						{JSON.stringify(forecast?.date).slice(6).replace('-', ' / ').replace('"', '')}
+						{JSON.stringify(forecast.date).slice(6).replace('-', ' / ').replace('"', '')}
 					</h1>
-					<p onClick={changeTempType}>{() => {
-						if (tempType == "F") {
-							setTempType("F");
-							console.log("aaa")
-							return `${JSON.stringify(tempForecast?.day?.avgtemp_f)}°F`;
-						} else {
-							console.log("aaa")
-							setTempType("C");
-							return (`${JSON.stringify(tempForecast?.day?.avgtemp_c)}°C`);
-						}
-					}}</p>
+					{(() => {
+						let oldTemp;
+						tempType == "F"
+							? oldTemp = `${JSON.stringify(forecast?.day?.avgtemp_f)}°F`
+							: oldTemp = `${JSON.stringify(forecast?.day?.avgtemp_c)}°C`
+						
+						setTemp(oldTemp);
+
+						// if (tempType == "F") {
+						// 	setTemp(`${JSON.stringify(forecast?.day?.avgtemp_f)}°F`);
+						// } else {
+						// 	setTemp(`${JSON.stringify(forecast?.day?.avgtemp_c)}°C`);
+						// }
+					
+						return <p onClick={changeTempType}>{temp}</p>;
+					})()}
 				</div>
 			);
 			newCards.push(newCard);
@@ -52,16 +57,6 @@ export default function Forecast() {
 		} else {
 			setTempType("C");
 			setTemp(`${JSON.stringify(tempForecast?.day?.avgtemp_c)}°C`);
-		}
-	}
-
-	function initTemp() {
-		if (tempType == "F") {
-			setTempType("F");
-			return `${JSON.stringify(tempForecast?.day?.avgtemp_f)}°F`;
-		} else {
-			setTempType("C");
-			return (`${JSON.stringify(tempForecast?.day?.avgtemp_c)}°C`);
 		}
 	}
 
