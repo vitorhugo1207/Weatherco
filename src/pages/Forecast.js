@@ -30,7 +30,7 @@ export default function Forecast() {
 					{(() => {
 						let oldTemp;
 						tempType == "F"
-							? oldTemp = `${JSON.stringify(forecast?.day?.avgtemp_f)}°F`
+							? oldTemp = `${JSON.stringify(forecastfsafsfas?.day?.avgtemp_f)}°F`
 							: oldTemp = `${JSON.stringify(forecast?.day?.avgtemp_c)}°C`
 						
 						setTemp(oldTemp);
