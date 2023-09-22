@@ -13,7 +13,7 @@ export default function Forecast() {
 	const [tempType, setTempType] = useState("C");
 	const [tempForecast, setTempForecast] = useState("C");
 
-	function card() {
+	async function card() {
 		setCards([]);
 		let newCards = [];
 
